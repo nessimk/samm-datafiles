@@ -1,0 +1,23 @@
+name: samm-pdf-builder
+on: push
+jobs:
+    generate-pdf:
+        # runs
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout datafiles
+          uses: actions/checkout@v2
+
+        - name: upload pdf
+          uses: actions/upload-artifact@v2
+          with:
+            name: samm2.pdf
+            path: $GITHUB_WORKSPACE/output/pdf/
+
+        services:
+            yaml2pdf:
+                image: samm2cloudpdf
+                volumes:
+                    - $GITHUB_WORKSPACE/output:/output
+                    - $GITHUB_WORKSPACE/static:/static.user
+                    - $GITHUB_WORKSPACE/samm-datafiles:/app/Datafiles
