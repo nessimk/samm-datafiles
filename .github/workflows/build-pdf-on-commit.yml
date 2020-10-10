@@ -16,7 +16,7 @@ jobs:
 
         services:
             yaml2pdf:
-                image: samm2cloudpdf
+                image: samm2cloudpdf:0.9
                 volumes:
                     - $GITHUB_WORKSPACE/output:/output
                     - $GITHUB_WORKSPACE/static:/static.user
