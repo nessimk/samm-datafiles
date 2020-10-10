@@ -18,6 +18,6 @@ jobs:
             yaml2pdf:
                 image: nessimk/samm2cloudpdf:0.9
                 volumes:
-                    - $GITHUB_WORKSPACE/output:/output
-                    - $GITHUB_WORKSPACE/static:/static.user
-                    - $GITHUB_WORKSPACE/samm-datafiles:/app/Datafiles
+                    - /github/workspace/output:/output
+                    - /github/workspace/static:/static.user
+                    - /github/workspace/samm-datafiles:/app/Datafiles
