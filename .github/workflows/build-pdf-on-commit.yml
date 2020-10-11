@@ -1,13 +1,26 @@
 name: samm-pdf-builder
 on: push
 jobs:
-    generate-pdf:
-        # runs
+    setup:
         runs-on: ubuntu-latest
         steps:
         - name: checkout datafiles
           uses: actions/checkout@v2
 
+    build:
+        needs: setup
+        runs-on: ubuntu-latest
+        services:
+            yaml2pdf:
+                image: nessimk/samm2cloudpdf:0.9
+                volumes:
+                    - /github/workspace/output:/output
+                    - /github/workspace/static:/static.user
+                    - /github/workspace/samm-datafiles:/app/Datafiles
+
+    upload:
+        needs: build
+        runs-on: ubuntu-latest
         - name: upload pdf
           uses: actions/upload-artifact@v2
           with:
@@ -20,10 +33,3 @@ jobs:
             name: log
             path: $GITHUB_WORKSPACE/output/
 
-        services:
-            yaml2pdf:
-                image: nessimk/samm2cloudpdf:0.9
-                volumes:
-                    - /github/workspace/output:/output
-                    - /github/workspace/static:/static.user
-                    - /github/workspace/samm-datafiles:/app/Datafiles
