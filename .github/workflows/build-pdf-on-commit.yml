@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: upload pdf
-        - uses: actions/upload-artifact@v2
+          uses: actions/upload-artifact@v2
           with:
             name: samm2.pdf
             path: $GITHUB_WORKSPACE/output/pdf/
