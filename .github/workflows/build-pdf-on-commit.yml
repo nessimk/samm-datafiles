@@ -6,7 +6,6 @@ jobs:
         steps:
         - name: checkout datafiles
           uses: actions/checkout@v2
-
     build:
         needs: setup
         runs-on: ubuntu-latest
@@ -17,19 +16,18 @@ jobs:
                     - /github/workspace/output:/output
                     - /github/workspace/static:/static.user
                     - /github/workspace/samm-datafiles:/app/Datafiles
-
     upload:
         needs: build
         runs-on: ubuntu-latest
+        steps:
         - name: upload pdf
           uses: actions/upload-artifact@v2
-          with:
-            name: samm2.pdf
-            path: $GITHUB_WORKSPACE/output/pdf/
+            with:
+                name: samm2.pdf
+                path: $GITHUB_WORKSPACE/output/pdf/
 
         - name: upload logs
           uses: actions/upload-artifact@v2
-          with:
-            name: log
-            path: $GITHUB_WORKSPACE/output/
-
+            with:
+                name: log
+                path: $GITHUB_WORKSPACE/output/
