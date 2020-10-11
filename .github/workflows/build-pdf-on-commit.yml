@@ -18,6 +18,8 @@ jobs:
     build:
         needs: setup
         runs-on: ubuntu-latest
+        steps:
+            - run: /app/make_pdf.sh /static.default /app/Datafiles /output
         services:
             yaml2pdf:
                 image: nessimk/samm2cloudpdf:0.9
