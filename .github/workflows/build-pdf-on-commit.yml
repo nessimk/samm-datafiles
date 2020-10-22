@@ -9,12 +9,15 @@ jobs:
 
         - name: "create output directory"
           run: |
-            mkdir ${{ github.workspace }}/output
+            mkdir ${{ github.home }}/datafiles
+            mv ${{ github.workspace }}/* ${{ github.home }}/datafiles
+            mkdir ${{ github.home }}/output
 
         - name: "exploration"
           run: |
             echo "github.workspace is ${{ github.workspace }}"
-            ls -al ${{ github.workspace }}
+            echo "github.home is ${{ github.home }}"
+            ls -al ${{ github.home }}
             ls -al ${{ github.workspace }}
          
     build:
@@ -24,7 +27,7 @@ jobs:
             - name: "process datafiles"
               uses: docker://nessimk/samm2cloudpdf:0.9
               with:
-                args: "/static.default ${{ github.workspace }}/samm-datafiles ${{ github.workspace }}/output"
+                args: "/static.default /github/home/datafiles /github/home/output"
     upload:
         needs: build
         runs-on: ubuntu-latest
@@ -33,4 +36,4 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: samm2.pdf
-            path: ${{ github.workspace }}/output/pdf/
+            path: ${{ github.home }}/output/pdf/
