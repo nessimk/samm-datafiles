@@ -6,6 +6,9 @@ jobs:
         steps:
         - name: "checkout datafiles"
           uses: actions/checkout@v2
+          run: |
+            echo "github.workspace is ${{ github.workspace }}"
+            ls -al ${{ github.workspace }}
 
         - name: "create output directory"
           run: |
@@ -18,7 +21,7 @@ jobs:
             - name: "process datafiles"
               uses: docker://nessimk/samm2cloudpdf:0.9
               with:
-                args: "/static.default ${{ github.workspace }}/ ${{ github.workspace }}/output"
+                args: "/static.default ${{ github.workspace }}/samm-datafiles ${{ github.workspace }}/output"
     upload:
         needs: build
         runs-on: ubuntu-latest
