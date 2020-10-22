@@ -21,7 +21,7 @@ jobs:
         - name: "process datafiles"
           uses: docker://nessimk/samm2cloudpdf:0.9
           with:
-            args: "/static.default /github/workspace/datafiles /github/workspace/"
+            args: "/static.default /github/workspace/datafiles /github/workspace/output"
 
         - name: upload pdf
           uses: actions/upload-artifact@v2
