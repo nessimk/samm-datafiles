@@ -18,18 +18,11 @@ jobs:
             echo "github.workspace is ${{ github.workspace }}"
             ls -al ${{ github.workspace }}
          
-    build:
-        needs: setup
-        runs-on: ubuntu-latest
-        steps:
-            - name: "process datafiles"
-              uses: docker://nessimk/samm2cloudpdf:0.9
-              with:
-                args: "/static.default /github/workspace/ /github/workspace/output"
-    upload:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
+        - name: "process datafiles"
+          uses: docker://nessimk/samm2cloudpdf:0.9
+          with:
+            args: "/static.default /github/workspace/datafiles /github/workspace/"
+
         - name: upload pdf
           uses: actions/upload-artifact@v2
           with:
