@@ -6,13 +6,16 @@ jobs:
         steps:
         - name: "checkout datafiles"
           uses: actions/checkout@v2
-          run: |
-            echo "github.workspace is ${{ github.workspace }}"
-            ls -al ${{ github.workspace }}
 
         - name: "create output directory"
           run: |
             mkdir ${{ github.workspace }}/output
+
+        - name: "exploration"
+          run: |
+            echo "github.workspace is ${{ github.workspace }}"
+            ls -al ${{ github.workspace }}
+            ls -al ${{ github.workspace }}
          
     build:
         needs: setup
