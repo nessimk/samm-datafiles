@@ -17,7 +17,7 @@ jobs:
           run: |
             echo "github.workspace is ${{ github.workspace }}"
             ls -al ${{ github.workspace }}
-            echo "github.home is $HOME
+            echo "github.home is $HOME"
             ls -al $HOME
          
     build:
