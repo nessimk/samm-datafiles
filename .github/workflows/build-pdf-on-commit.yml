@@ -4,8 +4,16 @@ jobs:
     setup:
         runs-on: ubuntu-latest
         steps:
-        - name: checkout datafiles
+        - name: "checkout datafiles"
           uses: actions/checkout@v2
+    build:
+        needs: setup
+        runs-on: ubuntu-latest
+        steps:
+            - name: "process datafiles"
+              uses: docker://nessimk/samm2cloudpdf:0.9
+              with:
+                args: "-v ${{ github.workspace }}/samm-datafiles:/app/Datafiles -v ${{ github.workspace }}/output:/output"
     upload:
         needs: build
         runs-on: ubuntu-latest
@@ -14,16 +22,4 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: samm2.pdf
-            path: $GITHUB_WORKSPACE/output/pdf/
-    build:
-        needs: setup
-        runs-on: ubuntu-latest
-        steps:
-            - run: /app/make_pdf.sh /static.default /app/Datafiles /output
-        services:
-            yaml2pdf:
-                image: nessimk/samm2cloudpdf:0.9
-                volumes:
-                    - /github/workspace/output:/output
-                    - /github/workspace/static:/static.user
-                    - /github/workspace/samm-datafiles:/app/Datafiles
+            path: ${{ github.workspace }}/output/pdf/
