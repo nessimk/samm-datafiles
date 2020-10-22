@@ -25,7 +25,7 @@ jobs:
             - name: "process datafiles"
               uses: docker://nessimk/samm2cloudpdf:0.9
               with:
-                args: "/static.default /github/workspace/datafiles /github/workspace/output"
+                args: "/static.default /github/workspace/ /github/workspace/output"
     upload:
         needs: build
         runs-on: ubuntu-latest
