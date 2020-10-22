@@ -1,7 +1,7 @@
 name: samm-pdf-builder
 on: push
 jobs:
-    setup:
+    build-pdf:
         runs-on: ubuntu-latest
         steps:
         - name: "checkout datafiles"
