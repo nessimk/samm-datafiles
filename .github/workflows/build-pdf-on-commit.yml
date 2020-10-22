@@ -9,16 +9,16 @@ jobs:
 
         - name: "create output directory"
           run: |
-            mkdir ${{ github.home }}/datafiles
-            mv ${{ github.workspace }}/* ${{ github.home }}/datafiles
-            mkdir ${{ github.home }}/output
+            mkdir $HOME/datafiles
+            mv ${{ github.workspace }}/* $HOME/datafiles/
+            mkdir $HOME/output
 
         - name: "exploration"
           run: |
             echo "github.workspace is ${{ github.workspace }}"
-            echo "github.home is ${{ github.home }}"
-            ls -al ${{ github.home }}
             ls -al ${{ github.workspace }}
+            echo "github.home is $HOME
+            ls -al $HOME
          
     build:
         needs: setup
