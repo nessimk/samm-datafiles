@@ -13,7 +13,7 @@ jobs:
             mv ${{ github.workspace }}/*.yml ${{ github.workspace }}/datafiles/
             mkdir ${{ github.workspace }}/output
 
-        - name: "exploration"
+        - name: "exploring"
           run: |
             echo "github.workspace is ${{ github.workspace }}"
             ls -al ${{ github.workspace }}
