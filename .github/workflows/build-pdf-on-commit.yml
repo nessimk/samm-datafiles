@@ -19,10 +19,10 @@ jobs:
         - name: "export pdf name"
           run: |
             short_hash=$(git rev-parse --short "$GITHUB_SHA")
-            _pdf_filename="samm2-${short_hash}.pdf"
+            filename="samm2-${short_hash}.pdf"
 
           env:
-            pdf_filename=$_pdf_filename
+            pdf_filename=$filename
 
         - name: "rename the pdf"
           run: |
