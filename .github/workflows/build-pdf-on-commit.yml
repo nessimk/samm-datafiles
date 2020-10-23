@@ -22,7 +22,7 @@ jobs:
             filename="samm2-${short_hash}.pdf"
 
           env:
-            pdf_filename=$filename
+            pdf_filename={{ samm2-$(git rev-parse --short "$GITHUB_SHA").pdf }}
 
         - name: "rename the pdf"
           run: |
