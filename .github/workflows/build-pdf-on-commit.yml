@@ -9,14 +9,14 @@ jobs:
 
         - name: "create output directory"
           run: |
-            mkdir ${{ github.workspace }}/datafiles
-            mv ${{ github.workspace }}/*.yml ${{ github.workspace }}/datafiles/
             mkdir ${{ github.workspace }}/output
+            #mkdir ${{ github.workspace }}/datafiles
+            #mv ${{ github.workspace }}/*.yml ${{ github.workspace }}/datafiles/
 
         - name: "process datafiles"
-          uses: docker://nessimk/samm2cloudpdf:0.9
+          uses: docker://nessimk/samm2cloudpdf:0.10
           with:
-            args: "/static.default /github/workspace/datafiles /github/workspace/output"
+            args: "/github/workspace/static /github/workspace/datafiles /github/workspace/output"
 
         - name: "list output"
           run: |
