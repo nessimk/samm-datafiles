@@ -18,12 +18,12 @@ jobs:
           with:
             args: "/github/workspace/static /github/workspace/datafiles /github/workspace/output"
 
-        - name: "list output"
+        - name: "rename the pdf"
           run: |
-            ls -al ${{ github.workspace }}/output/pdf
+            mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/samm2-${GITHUB_SHA}.pdf
          
         - name: "upload pdf"
           uses: actions/upload-artifact@v2
           with:
-            name: samm2.pdf
+            name: samm2-${GITHUB_SHA}.pdf
             path: ${{ github.workspace }}/output/pdf/
