@@ -16,19 +16,20 @@ jobs:
           with:
             args: "/github/workspace/static /github/workspace/datafiles /github/workspace/output"
 
-        - name: "create pdf name"
+        - name: "export pdf name"
           run: |
             short_hash=$(git rev-parse --short "$GITHUB_SHA")
-            echo "samm2-${short_hash}.pdf" > ${{ github.workspace  }}/_pdf_filename
+            _pdf_filename="samm2-${short_hash}.pdf"
+
+          env:
+            pdf_filename=$_pdf_filename
 
         - name: "rename the pdf"
           run: |
-            pdf_filename=$(cat ${{  github.workspace  }}/_pdf_filename)
-            sudo mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/${pdf_filename}
+            sudo mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/${{ env.pdf_filename }}
             
         - name: "upload pdf"
-          uses: FranzDiebold/github-env-vars-action@v1.2.1
           uses: actions/upload-artifact@v2
           with:
-            name: "samm2-$GITHUB_SHA_SHORT.pdf"
+            name: ${{ env.pdf_filename }}
             path: ${{ github.workspace }}/output/pdf/
