@@ -20,7 +20,7 @@ jobs:
 
         - name: "rename the pdf"
           run: |
-            mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/samm2-${GITHUB_SHA}.pdf
+            sudo mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/samm2-${GITHUB_SHA}.pdf
          
         - name: "upload pdf"
           uses: actions/upload-artifact@v2
