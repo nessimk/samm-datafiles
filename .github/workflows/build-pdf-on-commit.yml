@@ -24,12 +24,8 @@ jobs:
           env:
             pdf_filename={{ samm2-$(git rev-parse --short "$GITHUB_SHA").pdf }}
 
-        - name: "rename the pdf"
-          run: |
-            sudo mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/${{ env.pdf_filename }}
-            
         - name: "upload pdf"
           uses: actions/upload-artifact@v2
           with:
-            name: ${{ env.pdf_filename }}
+            name: *
             path: ${{ github.workspace }}/output/pdf/
