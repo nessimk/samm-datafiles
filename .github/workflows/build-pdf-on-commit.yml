@@ -26,4 +26,4 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: samm2.pdf
-            path: /github/workspace/output/pdf/
+            path: ${{ github.workspace }}/output/pdf/
