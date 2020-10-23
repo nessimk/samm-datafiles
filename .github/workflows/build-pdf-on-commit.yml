@@ -13,20 +13,16 @@ jobs:
             mv ${{ github.workspace }}/*.yml ${{ github.workspace }}/datafiles/
             mkdir ${{ github.workspace }}/output
 
-        - name: "exploring"
-          run: |
-            echo "github.workspace is ${{ github.workspace }}"
-            ls -al ${{ github.workspace }}
-         
         - name: "process datafiles"
           uses: docker://nessimk/samm2cloudpdf:0.9
           with:
             args: "/static.default /github/workspace/datafiles /github/workspace/output"
-    upload:
-        needs: build-pdf
-        runs-on: ubuntu-latest
-        steps:
-        - name: upload pdf
+
+        - name: "list output"
+          run: |
+            ls -al ${{ github.workspace }}/output/pdf
+         
+        - name: "upload pdf"
           uses: actions/upload-artifact@v2
           with:
             name: samm2.pdf
