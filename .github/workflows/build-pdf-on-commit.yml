@@ -10,8 +10,6 @@ jobs:
         - name: "create output directory"
           run: |
             mkdir ${{ github.workspace }}/output
-            #mkdir ${{ github.workspace }}/datafiles
-            #mv ${{ github.workspace }}/*.yml ${{ github.workspace }}/datafiles/
 
         - name: "process datafiles"
           uses: docker://nessimk/samm2cloudpdf:0.10
@@ -20,10 +18,12 @@ jobs:
 
         - name: "rename the pdf"
           run: |
-            sudo mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/samm2-${GITHUB_SHA}.pdf
-         
+            short_hash = $(git rev-parse --short "$GITHUB_SHA")
+            echo "pdf_filename=samm2-${short_hash}.pdf" >> $GITHUB_ENV
+            sudo mv ${{ github.workspace }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/samm2-${short_hash}.pdf
+            
         - name: "upload pdf"
           uses: actions/upload-artifact@v2
           with:
-            name: samm2-${GITHUB_SHA}.pdf
+            name: $pdf_filename
             path: ${{ github.workspace }}/output/pdf/
