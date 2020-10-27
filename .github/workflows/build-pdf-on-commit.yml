@@ -12,7 +12,7 @@ jobs:
             mkdir ${{ github.workspace }}/output
 
         - name: "process datafiles"
-          uses: docker://nessimk/samm2cloudpdf:0.11
+          uses: docker://nessimk/samm2cloudpdf:0.12
           with:
             args: "/github/workspace/static /github/workspace/datafiles /github/workspace/output"
 
