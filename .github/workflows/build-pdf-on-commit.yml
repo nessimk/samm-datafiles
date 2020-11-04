@@ -20,8 +20,18 @@ jobs:
           run: |
             sudo mv ${{ github.workspace  }}/output/pdf/samm2.pdf ${{ github.workspace }}/output/pdf/samm2-${{ github.sha  }}.pdf
 
+        - name: "save generated html"
+          run: |
+            sudo tar czf ${{ github.workspace  }}/output/generated-html-${{ github.sha  }}.tgz ${{ github.workspace }}/output/html
+
         - name: "upload pdf"
           uses: actions/upload-artifact@v2
           with:
             name: samm2-${{ github.sha  }}.pdf
             path: ${{ github.workspace }}/output/pdf/
+
+        - name: "upload generated html"
+          uses: actions/upload-artifact@v2
+          with:
+            name: generated-html-${{ github.sha  }}.tgz
+            path: ${{ github.workspace }}/output/
