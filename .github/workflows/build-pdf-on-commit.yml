@@ -22,7 +22,7 @@ jobs:
 
         - name: "save generated html"
           run: |
-            sudo tar czf ${{ github.workspace  }}/output/generated-html-${{ github.sha  }}.tgz ${{ github.workspace }}/output/html/pdf/
+            sudo tar czf ${{ github.workspace  }}/output/generated-html-${{ github.sha  }}.tgz ${{ github.workspace }}/output/pdf/
 
         - name: "upload pdf"
           uses: actions/upload-artifact@v2
